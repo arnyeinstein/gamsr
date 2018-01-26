@@ -1,0 +1,20 @@
+Package: gamsr
+Type: Package
+Title: Extracting information from gdxfiles
+Version: 0.1.0
+Author: Renger van Nieuwkoop
+Maintainer: Renger van Nieuwkoop <renger@vannieuwkoop.ch>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    ggplot2,
+    tidyverse,
+    gdxrrw,
+    stringr
+Suggests: 
+    testthat
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.0.1
