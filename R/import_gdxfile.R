@@ -2,6 +2,7 @@
 #' @param filename Name of the gdxfile to be imported.
 #' @param selection Character vector with information on which sets, scalars, parameters or variables to read
 #' @return All sets, scalars, parameters, and variables in the gdxfile
+#' @export import_gdxfile
 #' @examples
 #' \dontrun{import_gdxfile("results.gdx")}
 
@@ -24,9 +25,9 @@ import_gdxfile <- function(filename, selection = NULL) {
     }
     ## produce the gdxrrw command for reading a parameter
     if ((parinfo[i, "type"] == "parameter") & parinfo[i, "dim"] != 0) {
-      text[i] <- paste(parinfo[i, "name"], " <- ", "gdxrrw::rgdx.param('",
+      text[i] <- paste(parinfo[i, "name"], " <- ", "tibble::as_data_frame(gdxrrw::rgdx.param('",
                        filename, "', '",
-                       parinfo[i, "name"], "'", sq, ")", sep = "")
+                       parinfo[i, "name"], "', compress = TRUE", sq,  "))", sep = "")
       texta <- paste("attributes(", parinfo[i, "name"],
                      ")$type <- 'parameter'", sep = "")
     }
@@ -34,7 +35,7 @@ import_gdxfile <- function(filename, selection = NULL) {
     if ((parinfo[i, "type"] == "set") & parinfo[i, "dim"] != 0) {
       text[i] <- paste(parinfo[i, "name"], " <- ", "gdxrrw::rgdx.set('",
                        filename, "', '",
-                       parinfo[i, "name"], "'", sq, ")", sep = "")
+                       parinfo[i, "name"], "', compress = TRUE",sq, ")", sep = "")
       texta <- paste("attributes(", parinfo[i, "name"],
                      ")$type <- 'parameter'", sep = "")
     }
@@ -53,7 +54,7 @@ import_gdxfile <- function(filename, selection = NULL) {
                        "\", field = \"all\"))", sep = "")
       texta <- paste("attributes(", parinfo[i, "name"],
                      ")$type <- 'variable'", "\n", parinfo[i, "name"],
-                     " <- tibble::as_data_frame(rgdx_var(", parinfo[i, "name"], "))", sep = "")
+                     " <- tibble::as_data_frame(rgdx.var(", parinfo[i, "name"], "))", sep = "")
     }
     textl <- paste("l.all[[", i, "]] <- list(name ='", parinfo[i, "name"],
                    sep = "")

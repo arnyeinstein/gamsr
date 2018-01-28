@@ -1,6 +1,7 @@
 #' Function to read and save the information on all the sets, scalars, parameters and variables from a gdx file. Function used in import_gdxfile()
 #' @param filename Name of the gdxfile to be imported.
 #' @return Dataframe "parinfo" with info on all sets, scalars, parameters, and variables in the gdxfile
+#' @export read_info_gdxfile
 #' @examples
 #' \dontrun{read_info_gdxfile("trnsport.gdx")}
 

@@ -1,10 +1,11 @@
 #' Auxiliary function to read a variable from a gdx file (like rgdx.set). Function used in import_gdxfile().
 #' @param varname Name of the gdx variable to be imported
 #' @return object with all the information from the variable
+#' @export rgdx.var
 #' @examples
-#' \dontrun{rgdx_var("Z")}
+#' \dontrun{rgdx.var("Z")}
 
-rgdx_var <- function(varname) {
+rgdx.var <- function(varname) {
   var.data <- data.frame(varname$val)
   var.dim <- length(varname$uels)
   domains <- varname$domains
