@@ -6,9 +6,6 @@
 #' @examples
 #' \dontrun{import_gdxfile("results.gdx")}
 
-
-
-
 import_gdxfile <- function(filename, selection = NULL) {
   parinfo <- read_info_gdxfile(filename)
   if (!is.null(selection)) {
@@ -36,9 +33,11 @@ import_gdxfile <- function(filename, selection = NULL) {
           filename,
           "', '",
           parinfo[i, "name"],
-          "', compress = TRUE",
+          "', compress = TRUE, ts = TRUE",
           sq,
-          "))",
+          "))", parinfo[i, "ame"],
+          "%>% map_if(is.factor, as.character) %>% as_data_frame ->",
+          parinfo[i, "name"],
           sep = ""
         )
       texta <- paste("attributes(", parinfo[i, "name"],
@@ -53,7 +52,7 @@ import_gdxfile <- function(filename, selection = NULL) {
         filename,
         "', '",
         parinfo[i, "name"],
-        "', compress = TRUE",
+        "', compress = TRUE, ts = TRUE, te = TRUE",
         sq,
         ")",
         sep = ""
@@ -73,7 +72,7 @@ import_gdxfile <- function(filename, selection = NULL) {
           "', '",
           parinfo[i, "name"],
           "'",
-          ")",
+          ", ts = TRUE)",
           sep = ""
         )
       texta <- paste("attributes(", parinfo[i, "name"],
@@ -99,7 +98,9 @@ import_gdxfile <- function(filename, selection = NULL) {
         parinfo[i, "name"],
         " <- tibble::as_data_frame(rgdx.var(",
         parinfo[i, "name"],
-        "))",
+        ")) \n ", parinfo[i, "name"],
+        "%>% map_if(is.factor, as.character) %>% as_data_frame ->",
+        parinfo[i, "name"],
         sep = ""
       )
     }
