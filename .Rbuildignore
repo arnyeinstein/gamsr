@@ -1,2 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+merged.gdx
+gdxtext.R
+README.Rmd
+trnsport.gdx
