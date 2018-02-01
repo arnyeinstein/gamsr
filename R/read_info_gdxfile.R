@@ -13,9 +13,12 @@ read_info_gdxfile <- function(filename) {
   type_index <- match(gams_types, names(temp))
   length(type_index) == length(gams_types) # build error message and stop
   for (i in type_index) {
-    if ( dim(temp[[i]])[1] > 0) temp[[i]]$type <- stringr::str_sub(names(temp)[i], 1, nchar(names(temp)[i])-1)
+    if (dim(temp[[i]])[1] > 0)
+      temp[[i]]$type <-
+        stringr::str_sub(names(temp)[i], 1, nchar(names(temp)[i]) - 1)
   }
-  temp2 <- rbind(temp$sets, temp$parameters, temp$variables) # change: benutzung von gamstypes
+  temp2 <-
+    rbind(temp$sets, temp$parameters, temp$variables) # change: benutzung von gamstypes
   gams_info <- c("name", "dim", "text", "domnames", "type")
   info_index <- match(gams_info, names(temp2))
   length(info_index) == length(gams_info) # build error message and stop

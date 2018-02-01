@@ -20,7 +20,8 @@ rgdx.var <- function(varname) {
     index         <- varname$domains[i]
     colnames(dim) <- c(index, "id")
     var.colname   <- paste("X", i, sep = "")
-    var.data      <- merge(dim, var.data, by.x = "id", by.y = var.colname)
+    var.data      <-
+      merge(dim, var.data, by.x = "id", by.y = var.colname)
     var.data      <- var.data[, -which(colnames(var.data) == "id")]
   }
   var.data <- var.data[, c(var.dim:1, var.dim + 1)]
